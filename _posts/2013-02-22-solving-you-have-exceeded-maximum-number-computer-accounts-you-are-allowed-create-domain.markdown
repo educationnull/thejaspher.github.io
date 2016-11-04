@@ -12,7 +12,7 @@ Issue: When joining a computer to your domain as a member of the Authenticated U
 
 Solution: You need to change the _ms-DS-MachineAccountQuota_ attribute using ADSI Edit. Steps:
 
-1.  Click Start | Run | and enter adsiedit.msc.
+1.  Click Start > Run > and enter adsiedit.msc.
 2.  Expand the Domain node and locate the object that begins with “DC=” and contains the domain name of the domain your interested in.
 3.  Right on the “DC=” object and click Properties.
 4.  Locate the ms-DS-MachineAccountQuota attribute on the Attribute Editor tab and click Edit.
