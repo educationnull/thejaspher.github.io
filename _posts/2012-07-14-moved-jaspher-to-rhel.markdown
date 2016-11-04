@@ -2,7 +2,7 @@
 layout: post
 title:  "Moved jaspher.com from bluehost to RHEL on Amazon ec2"
 date:   2012-07-14
-categories: meta RHEL-CentOS
+tags: meta RHEL-CentOS
 ---
 In an effort to better understand the Linux OS, I’ve moved my personal blog over from the shared hosting solution Bluehost to Amazon’s EC2 service.
 
