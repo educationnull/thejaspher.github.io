@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Hello World!"
-date:   2012-1-21
-categories: meta
+date:   2012-01-21
+tags: meta
 ---
 The obligatory "Hello World" post. I've decided to start a blog mainly to publicly document fixes to problems I run into. During the course of a week, the question, "Now, how do I do that again?" may come up several times. Hopefully this blog will put an end to that.
 
