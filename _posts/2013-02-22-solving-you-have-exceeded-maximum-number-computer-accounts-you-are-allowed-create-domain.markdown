@@ -6,9 +6,9 @@ categories: Active-Directory
 ---
 Issue: When joining a computer to your domain as a member of the Authenticated Users (in other words, regular user), you receive the following messages:
 
-> The machine account for this computer either does not exist or is unavailable.”  
-> “Your computer could not be joined to the domain. You have exceeded the maximum number of computer accounts you are allowed to create in this domain. Contact your system administrator to have this limit reset or increased.”  
-> “The following error occurred attempting to join the domain “<var>domain</var>.com”. Your computer could not be joined to the domain. You have exceeded the maximum number of computer accounts you are allowed to create in this domain. Contact your system administrator to have this limit reset or increased.”
+> The machine account for this computer either does not exist or is unavailable.
+> Your computer could not be joined to the domain. You have exceeded the maximum number of computer accounts you are allowed to create in this domain. Contact your system administrator to have this limit reset or increased.
+> The following error occurred attempting to join the domain example.com. Your computer could not be joined to the domain. You have exceeded the maximum number of computer accounts you are allowed to create in this domain. Contact your system administrator to have this limit reset or increased.
 
 Solution: You need to change the _ms-DS-MachineAccountQuota_ attribute using ADSI Edit. Steps:
 
