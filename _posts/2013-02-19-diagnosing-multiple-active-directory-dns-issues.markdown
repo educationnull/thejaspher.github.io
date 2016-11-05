@@ -2,7 +2,7 @@
 layout: post
 title:  "Diagnosing multiple Active Directory DNS issues"
 date:   2013-02-19
-categories: Active-Directory
+tags: Active-Directory
 ---
 Issue:
 
