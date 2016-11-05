@@ -5,13 +5,6 @@ layout: default
 <div class="archive">
 
   <h1 class="page-heading">Posts</h1>
-  <div class="tags">
-    {% for tag in site.tags %}
-      {% assign t = tag | first %}
-      {% assign posts = tag | last %}
-      {{t | downcase | replace:" ","-" }}
-    {% endfor %}
-  </div>
   {{ content }}
 
   <ul class="post-list">
