@@ -2,7 +2,7 @@
 layout: post
 title:  "Puppet Configuration management - Getting started"
 date:   2014-07-01
-categories: Puppet RHEL-CentOS
+tags: Puppet RHEL-CentOS
 ---
 
 In this walkthrough, we will be doing an install of a Puppet Master, and deploying an Apache server onto a Puppet agent (client).

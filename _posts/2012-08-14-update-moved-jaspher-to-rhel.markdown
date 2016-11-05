@@ -2,7 +2,7 @@
 layout: post
 title:  "Update: Moved jaspher.com from bluehost to RHEL on Amazon ec2"
 date:   2012-08-14
-categories: meta RHEL-CentOS
+tags: meta RHEL-CentOS
 ---
 …or "Hello CentOS!". Follow up: this was pricier than expected. I launched a micro instance of my red hat server, neglecting to research how much it would cost. Micro instances cost $0.02 per hour, but using RHEL, the price jumps to $0.07\. This bring the cost up to around $53 a month, about the same to host this simple blog on bluehost for a year! To minimize the cost of hosting this blog, I started another ec2 instance in Amazon. This time using the CentOS 6.2 (Bare) ami. In short, CentOS is based off of RHEL. A better explanation from nixCraft:
 

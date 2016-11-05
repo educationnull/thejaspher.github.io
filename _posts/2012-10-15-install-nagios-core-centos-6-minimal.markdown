@@ -2,7 +2,7 @@
 layout: post
 title:  "Install Nagios Core on CentOS 6 minimal"
 date:   2012-10-15
-categories: RHEL-CentOS Monitoring
+tags: RHEL-CentOS Monitoring
 ---
 This [script](http://beginlinux.com/blog/2012/01/setup-a-nagios-server-on-centos-6-2/) created by Mike Weber at [BeginLinux.com](http://beginlinux.com/) was designed and tested for Nagios 3.3.1 on CentOS 5.5 and 6.2\. I’ve tested it on a fresh install of CentOS 6.3 minimal and it works perfectly. The modified script (I only changed the version number and download locations):
 
