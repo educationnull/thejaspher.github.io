@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Quickly remove comment lines in linux text files"
-date:   2012-1-21
+title:  "Puppet Configuration management - Getting started"
+date:   2014-07-01
 categories: Puppet RHEL-CentOS
 ---
 
