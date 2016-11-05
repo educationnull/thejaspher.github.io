@@ -2,7 +2,7 @@
 layout: post
 title:  "Solving: You have exceeded the maximum number of computer accounts you are allowed to create in this domain..."
 date:   2013-02-22
-categories: Active-Directory
+tags: Active-Directory
 ---
 Issue: When joining a computer to your domain as a member of the Authenticated Users (in other words, regular user), you receive the following messages:
 
