@@ -8,6 +8,14 @@
     {% include header.html %}
 
     <main class="page-content" aria-label="Content">
+      <div class="tags">
+        {% for tag in site.tags %}
+          {% assign t = tag | first %}
+          {% assign posts = tag | last %}
+          {{t | downcase | replace:" ","-" }} | 
+        {% endfor %}
+      </div>
+      
       <div class="wrapper">
         {{ content }}
       </div>
