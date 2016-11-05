@@ -20,15 +20,15 @@
           {% endif %}
         {% endfor %}
       </div>
-      <div class="tags">
-        {% for tag in site.tags %}
-          {% assign t = tag | first %}
-          {% assign posts = tag | last %}
-          {{t | downcase | replace:" ","-" }} | 
-        {% endfor %}
-      </div>   
-    </nav>
 
+    </nav>
+    <div class="tags">
+      {% for tag in site.tags %}
+        {% assign t = tag | first %}
+        {% assign posts = tag | last %}
+        {{t | downcase | replace:" ","-" }} | 
+      {% endfor %}
+    </div>   
   </div>
 
 </header>
