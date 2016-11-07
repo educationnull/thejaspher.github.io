@@ -4,6 +4,10 @@ title:  "Welcome to Jekyll!"
 date:   2016-11-01 16:14:19 -1000
 tags: jekyll meta
 ---
-I'm currently in the process of moving my blog into Jekyll powered by Github pages. None of the importers Ive tried are working (or I'm not trying hard enough), so I'll be manually moving everything over soon. 
+I've moved this blog from drupal to Github Pages powered by Jekyll. So many reasons behind this, but quickly:
+
+1. I dont need to manage the server anymore
+2. Blog will load very quickly becuase static pages are being served
+3. It's free
 
 More info: [Github Pages](https://pages.github.com/) and [Jekyll](https://jekyllrb.com/)
