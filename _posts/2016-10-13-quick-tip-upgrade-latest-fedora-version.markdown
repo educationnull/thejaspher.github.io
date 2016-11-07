@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Quick tip: Upgrade to the latest Fedora version"
+title: "[Fedora] Quick tip: Upgrade to the latest Fedora version"
 date: 2016-10-13
-tags: fedora
+tags: linux
 ---
     sudo dnf upgrade --refresh
     sudo dnf install dnf-plugin-system-upgrade
