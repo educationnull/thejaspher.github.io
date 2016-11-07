@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "[CentOS 7] Installing Ruby on Rails"
+title: "[RHEL 7/ CentOS 7] Installing Ruby on Rails"
 date: 2015-11-09
-tags: rhel-centos ruby-on-rails
+tags: webdev linux
 ---
 I’ve been playing around with Ruby on Rails recently and have grown to appreciate the framework and the [MVC Paradigm]. I’ve been playing around with various cloud IDEs like [Cloud9]and [Nitrous], but nothing beats a local dev server and Vim. I used this [Digital Ocean] tutorial as a starting point, with a few tweaks. I’ll be using [rbenv]to manage my Ruby installations. [RVM]is an alternative to this.
 
