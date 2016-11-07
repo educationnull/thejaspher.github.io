@@ -26,7 +26,7 @@
       {% for tag in site.tags %}
         {% assign t = tag | first %}
         {% assign posts = tag | last %}
-        {{t | downcase | replace:" ","-" }} | 
+        {{t | downcase | replace:" ","-" }}
       {% endfor %}
     </div>   
   </div>
