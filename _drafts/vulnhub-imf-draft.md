@@ -94,5 +94,18 @@ Awesome, found the admin login area.
 
 I tried some dummy data for username and password. Two things I noticed about this form:
 
-1. It looks like the form insecurely lets me know that the username I've tried is incorrect.
+1. It looks like the form insecurely lets me know that the username I've tried is incorrect. 
 2. Uses a phpsessid.
+
+In burpsuite, the "failed login" page's response gives us a nice note from the develoer (in source html):
+
+    Invalid username.
+    <form method="POST" action="">
+    <label>Username:</label><input type="text" name="user" value=""><br />
+    <label>Password:</label><input type="password" name="pass" value=""><br />
+    <input type="submit" value="Login">
+    <!-- I couldn't get the SQL working, so I hard-coded the password. It's still mad secure through. - Roger -->
+    </form>
+
+
+
