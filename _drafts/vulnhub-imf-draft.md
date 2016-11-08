@@ -1,5 +1,7 @@
-Local network 172.16.1.0/24
-VM https://www.vulnhub.com/entry/imf-1,162/
+
+Local network - 172.16.1.0/24
+
+VM - [IMF: 1](https://www.vulnhub.com/entry/imf-1,162/)
 
 Overview:
 
@@ -107,5 +109,10 @@ In burpsuite, the "failed login" page's response gives us a nice note from the d
     <!-- I couldn't get the SQL working, so I hard-coded the password. It's still mad secure through. - Roger -->
     </form>
 
+So I'm guessing that I have to do the following things:
+
+1. Brute force the username, probably using the names found on the public page
+2. Brute force the password OR
+3. SQL injection to display the hard-coded password.
 
 
