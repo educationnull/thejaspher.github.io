@@ -12,4 +12,21 @@ Found possible target - 172.16.1.76
 nmap -sS 172.16.1.76
 # port 80
 
-use browser - IMF Webpage. Click around
+use browser - IMF Webpage. Click around.
+
+Possible vulnerabilities:
+Contact form
+
+Possible targets:
+
+Roger S. Michaels
+rmichaels@imf.local
+Director
+
+Alexander B. Keith
+akeith@imf.local
+Deputy Director
+
+Elizabeth R. Stone
+estone@imf.local
+Chief of Staff
