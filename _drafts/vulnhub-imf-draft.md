@@ -88,7 +88,7 @@ and one more decode gives me this somewhat garbled text which resembles the CTF 
 
     imfc&F 
     
-So it seems like the input is close but not the exact string I need. After serveral attempts at combining strings, I ended up with this, (which was the most obvious - `ZmxhZzJ7YVcxbVlXUnRhVzVwYzNSeVlYUnZjZz09fQ==`
+So it seems like the input is close but not the exact string I need. After serveral attempts at combining strings, I ended up with this (which was the most obvious), `ZmxhZzJ7YVcxbVlXUnRhVzVwYzNSeVlYUnZjZz09fQ==`
 
     echo ZmxhZzJ7YVcxbVlXUnRhVzVwYzNSeVlYUnZjZz09fQ== | base64 --decode
     flag2{aW1mYWRtaW5pc3RyYXRvcg==}
@@ -108,7 +108,7 @@ I tried some dummy data for username and password. Two things I noticed about th
 1. It looks like the form insecurely lets me know that the username I've tried is incorrect. 
 2. Uses a phpsessid.
 
-In burpsuite, the "failed login" page's response gives us a nice note from the develoer (in source html):
+In burpsuite, the "failed login" page's response gives us a nice note from the develoer (also could probably be Roger S. Michaels - the director):
 
     Invalid username.
     <form method="POST" action="">
@@ -118,13 +118,26 @@ In burpsuite, the "failed login" page's response gives us a nice note from the d
     <!-- I couldn't get the SQL working, so I hard-coded the password. It's still mad secure through. - Roger -->
     </form>
 
+
 At this point it looks like this is the form I'd have to exploit to get the rest of the flags.
 
 ## Exploitation
 
-Based off of Enumeration I will probably have to do the following things:
+Based off of Enumeration I will probably have to do some the following things:
 
-1. Brute force the username, probably using the names found on the public page
-2. Brute force the password OR
-3. SQL injection to display the hard-coded password.
+1. Brute force the username, probably using the names/ emails found on the public page
+2. Brute force the password
+3. Something with the PHPSESSID (I just don't know what yet)
 
+### Users enumeration
+
+In burpsuite, I tested the following usernames to see if if the "Invalid username" message does not appear:
+
+    rmichaels@imf.local: Invalid username.
+    akeith@imf.local: Invalid username.
+    estone@imf.local: Invalid username.
+    *** rmichaels: Invalid password. ***
+    akeith: Invalid username.
+    estone: Invalid username.
+    
+Got a hit on Roger S. Michaels's username. 
