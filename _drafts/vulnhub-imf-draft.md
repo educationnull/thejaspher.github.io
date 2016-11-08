@@ -1,13 +1,22 @@
 
+## Overview
+
 Local network - 172.16.1.0/24
 
 VM - [IMF: 1](https://www.vulnhub.com/entry/imf-1,162/)
 
-Overview:
+
+
+
+## Recon
+
+VM description from site:
 
 > Welcome to "IMF", my first Boot2Root virtual machine. IMF is a intelligence agency that you must hack to get all flags and ultimately root. The flags start off easy and get harder as you progress. Each flag contains a hint to the next flag. I hope you enjoy this VM and learn something.
-    
-Import and start VM
+
+VM's from vulnhub are usually have a web front-end, so I will be looking at that.
+
+Find on my LAN
 
     netdiscover -r 172.16.1.0/24
     
@@ -18,39 +27,39 @@ Found possible target - 172.16.1.76
     nmap -sS 172.16.1.76
     port 80 open
 
-use browser - IMF Webpage. Click around.
+Use browser - load IMF Webpage. Click around.
 
-Possible vulnerabilities:
-Contact form
+As stated in the description IMF is a US Inteligence agency. The site lists three possible targets:
 
-Possible targets:
+- Roger S. Michaels
+- rmichaels@imf.local
+- Director
 
-Roger S. Michaels
-rmichaels@imf.local
-Director
+- Alexander B. Keith
+- akeith@imf.local
+- Deputy Director
 
-Alexander B. Keith
-akeith@imf.local
-Deputy Director
+- Elizabeth R. Stone
+- estone@imf.local
+- Chief of Staff
 
-Elizabeth R. Stone
-estone@imf.local
-Chief of Staff
 
-===
-nothing from nmap/ nikto/ tamper
-contact form does not display any errors.
+## Enumeration
 
-view page source/ inspect
+Quick scans from nmap and nikto yield nothing.
+
+A possible vulnerability in web front-end is the contact form. The contact form does not display any errors after submission and Burpsuite shows nothing interesting. This could be a dead end.
+
+In desperation - I decided to view page html source for any hints and got the first flag.
+
     <!-- flag1{YWxsdGhlZmlsZXM=} -->
 
-looks like base64
+Looks like base64, let's decrypt:
 
     echo YWxsdGhlZmlsZXM= | base64 --decode
     allthefiles
 
-Back to the browser - http://172.16.1.76/allthefiles - 404. I've tried several extenions with no luck. Back to the html I guess..
-
+Back to the browser - http://172.16.1.76/allthefiles - 404. I've tried several extenions (html, txt, etc) with no luck. Back to the html I guess..
 
 Suspicous js files in html head:
 
@@ -109,10 +118,13 @@ In burpsuite, the "failed login" page's response gives us a nice note from the d
     <!-- I couldn't get the SQL working, so I hard-coded the password. It's still mad secure through. - Roger -->
     </form>
 
-So I'm guessing that I have to do the following things:
+At this point it looks like this is the form I'd have to exploit to get the rest of the flags.
+
+## Exploitation
+
+Based off of Enumeration I will probably have to do the following things:
 
 1. Brute force the username, probably using the names found on the public page
 2. Brute force the password OR
 3. SQL injection to display the hard-coded password.
-
 
