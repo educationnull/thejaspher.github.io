@@ -32,5 +32,53 @@ estone@imf.local
 Chief of Staff
 
 ===
+nothing from nmap/ nikto/ tamper
+contact form does not display any errors.
+
 view page source/ inspect
     <!-- flag1{YWxsdGhlZmlsZXM=} -->
+
+looks like base64
+    echo YWxsdGhlZmlsZXM= | base64 --decode
+    allthefiles
+
+
+suspicous js files in html head:
+
+    <script src="js/ZmxhZzJ7YVcxbVl.js"></script>
+    <script src="js/XUnRhVzVwYzNS.js"></script>
+    <script src="js/eVlYUnZjZz09fQ==.min.js"></script>
+
+`eVlYUnZjZz09fQ==.min.js` sticks out since it looks like base64 off the bat.
+
+At first I thought the rest could be some backend js caching but let's just try all three:
+    
+    echo ZmxhZzJ7YVcxbVl | base64 --decode
+    flag2{aW1mY
+    
+    echo XUnRhVzVwYzNS | base64 --decode
+    base64: invalid input
+    
+    echo eVlYUnZjZz09fQ== | base64 --decode
+    yYXRvcg==}
+
+Looks looks like i have to concatenate the two successful decodes to get the flag:
+
+    flag2{aW1mYyYXRvcg==}
+
+and one more decode gives me this somewhat garbled text which resembles the CTF VM Name: 
+
+    imfc&F 
+    
+So it seems like the input is close but not the exact string I need. After serveral attempts at combining strings, I ended up with this, (which was the most obvious - `ZmxhZzJ7YVcxbVlXUnRhVzVwYzNSeVlYUnZjZz09fQ==`
+
+    echo ZmxhZzJ7YVcxbVlXUnRhVzVwYzNSeVlYUnZjZz09fQ== | base64 --decode
+    flag2{aW1mYWRtaW5pc3RyYXRvcg==}
+    
+    echo aW1mYWRtaW5pc3RyYXRvcg== | base64 --decode
+    imfadministratorbase64
+
+Okay so now what?
+
+possible directory or password/ backdoor:
+172.16.1.100/allthefiles - 404
