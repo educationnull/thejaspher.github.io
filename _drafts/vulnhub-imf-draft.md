@@ -31,17 +31,17 @@ Use browser - load IMF Webpage. Click around.
 
 As stated in the description IMF is a US Inteligence agency. The site lists three possible targets:
 
-- Roger S. Michaels
-- rmichaels@imf.local
-- Director
-
-- Alexander B. Keith
-- akeith@imf.local
-- Deputy Director
-
-- Elizabeth R. Stone
-- estone@imf.local
-- Chief of Staff
+    Roger S. Michaels
+    rmichaels@imf.local
+    Director
+  
+    Alexander B. Keith
+    akeith@imf.local
+    Deputy Director
+  
+    Elizabeth R. Stone
+    estone@imf.local
+    Chief of Staff
 
 
 ## Enumeration
