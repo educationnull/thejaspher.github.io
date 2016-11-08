@@ -1,16 +1,20 @@
-https://www.vulnhub.com/entry/imf-1,162/
+Local network 172.16.1.0/24
+VM https://www.vulnhub.com/entry/imf-1,162/
 
-    Welcome to "IMF", my first Boot2Root virtual machine. IMF is a intelligence agency that you must hack to get all flags and ultimately root. The flags start off easy and get harder as you progress. Each flag contains a hint to the next flag. I hope you enjoy this VM and learn something.
+Overview:
+
+> Welcome to "IMF", my first Boot2Root virtual machine. IMF is a intelligence agency that you must hack to get all flags and ultimately root. The flags start off easy and get harder as you progress. Each flag contains a hint to the next flag. I hope you enjoy this VM and learn something.
     
 Import and start VM
-Local network 172.16.1.0/24
 
-netdiscover -r 172.16.1.0/24
+    netdiscover -r 172.16.1.0/24
+    
 MAC Vendor Camdus Computer Systems = VM Virtualbox
 
 Found possible target - 172.16.1.76
-nmap -sS 172.16.1.76
-# port 80
+
+    nmap -sS 172.16.1.76
+    port 80 open
 
 use browser - IMF Webpage. Click around.
 
@@ -39,11 +43,14 @@ view page source/ inspect
     <!-- flag1{YWxsdGhlZmlsZXM=} -->
 
 looks like base64
+
     echo YWxsdGhlZmlsZXM= | base64 --decode
     allthefiles
 
+Back to the browser - http://172.16.1.76/allthefiles - 404. I've tried several extenions with no luck. Back to the html I guess..
 
-suspicous js files in html head:
+
+Suspicous js files in html head:
 
     <script src="js/ZmxhZzJ7YVcxbVl.js"></script>
     <script src="js/XUnRhVzVwYzNS.js"></script>
@@ -78,7 +85,14 @@ So it seems like the input is close but not the exact string I need. After serve
     echo aW1mYWRtaW5pc3RyYXRvcg== | base64 --decode
     imfadministratorbase64
 
-Okay so now what?
+Okay, back to the browser with our findings:
 
-possible directory or password/ backdoor:
-172.16.1.100/allthefiles - 404
+- http://172.16.0.76/imfadministratorbase64 - 404
+- http://172.16.0.76/imfadministrator - 200 OK
+
+Awesome, found the admin login area.
+
+I tried some dummy data for username and password. Two things I noticed about this form:
+
+1. It looks like the form insecurely lets me know that the username I've tried is incorrect.
+2. Uses a phpsessid.
