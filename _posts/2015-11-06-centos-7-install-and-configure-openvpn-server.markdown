@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "CentOS 7: install and configure openVPN server"
+title: "[CentOS 7]: install and configure openVPN server"
 date: 2015-11-06
-tags: rhel-centos netsec
+tags: linux netsec
 ---
 DigitalOcean has a [good tutorial] on how to set up an OpenVPN server on CentOS 7. I was not able to follow step-by-step since the tutorial goes into setting up routing using iptables, instead of using the builtin firewall-cmd. Later, I had issues connecting to the server from a Windows machine, but was able to resolve that (included below).
 
