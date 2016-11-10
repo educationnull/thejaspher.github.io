@@ -120,6 +120,7 @@ I tried some dummy data for username and password. Two things I noticed about th
 2. Uses a phpsessid.
 
 In burpsuite, the "failed login" page's response gives us a nice note from the develoer (also could probably be Roger S. Michaels - the director):
+
 ```html
 Invalid username.
 <form method="POST" action="">
