@@ -51,7 +51,7 @@ As stated in the description IMF is a US Inteligence agency. The site lists thre
 
 Quick scans from nmap and nikto yield nothing.
 
-A possible vulnerability in web front-end is the contact form. The contact form does not display any errors after submission and Burpsuite shows nothing interesting. This could be a dead end.
+A possible vulnerability in web front-end is the contact form. The contact form does not display any errors after submission and Burp Suite shows nothing interesting. This could be a dead end.
 
 In desperation - I decided to view page html source for any hints and got the first flag.
 
@@ -119,7 +119,7 @@ I tried some dummy data for username and password. Two things I noticed about th
 1. It looks like the form insecurely lets me know that the username I've tried is incorrect. 
 2. Uses a phpsessid.
 
-In burpsuite, the "failed login" page's response gives us a nice note from the develoer (also could probably be Roger S. Michaels - the director):
+In Burp Suite, the "failed login" page's response gives us a nice note from the develoer (also could probably be Roger S. Michaels - the director):
 
 ```html
 Invalid username.
@@ -143,7 +143,7 @@ Based off of Enumeration I will probably have to do some the following things:
 
 ### Users enumeration
 
-In burpsuite, I tested the following usernames to see if if the "Invalid username" message does not appear:
+In Burp Suite, I tested the following usernames to see if if the "Invalid username" message does not appear:
 
     rmichaels@imf.local: Invalid username.
     akeith@imf.local: Invalid username.
@@ -156,7 +156,7 @@ Got a hit on Roger S. Michaels's username.
 
 ### Bruteforce
 
-I'll try to brute force Roger's account using hydra and a list built into kali at `/usr/share/wordlists/*`. I'll start with the popular rockyou list. After a few hours of false positives and 301 errors I was able to craft a http-form-post string in hydra thanks to Burpsuite, Wireshark lots of Googling. In the end, I found that it was a missing "=" that got the best of me.
+I'll try to brute force Roger's account using hydra and a list built into kali at `/usr/share/wordlists/*`. I'll start with the popular rockyou list. After a few hours of false positives and 301 errors I was able to craft a http-form-post string in hydra thanks to Burp Suite, Wireshark lots of Googling. In the end, I found that it was a missing "=" that got the best of me.
 
 ```bash
 cd /usr/share/wordlists/
@@ -164,4 +164,5 @@ gunzip ./rockyou.txt.gz
 
 hydra -l rmichaels -P /usr/share/wordlists/rockyou.txt 172.16.1.76 http-form-post "/imfadministrator/index.php:user=^USER^&pass=^PASS^:Invalid:H=Cookie: PHPSESSID=71jtqremlb5q74hge3apaog8d3" -t 64
 ```
- # .. To be continued ..
+# .. To be continued ..
+
