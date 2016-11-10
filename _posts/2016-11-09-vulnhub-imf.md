@@ -1,11 +1,14 @@
-
+---
+layout: post
+title:  "Vulnhub IMF VM (in progress)"
+date:   2016-11-09
+tags: netsec
+---
 ## Overview
 
 Local network - 172.16.1.0/24
 
 VM - [IMF: 1](https://www.vulnhub.com/entry/imf-1,162/)
-
-
 
 
 ## Recon
