@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Better robots.txt management"
+title: "[nginx] Better robots.txt management"
 date: 2015-01-23
-tags: nginx
+tags: linux
 ---
 Robots.txt is a file that lets legitimate crawlers know what pages/ directories they are allowed to scan. Ideally, you’d want to disallow areas that are reserved for backend management like ‘/admin/’, while allowing crawlers to access public areas of your site.
 Here’s Drupal’s default robots.txt:
