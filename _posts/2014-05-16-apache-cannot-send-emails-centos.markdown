@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Apache cannot send emails on CentOS"
+title:  "[RHEL /CentOS 7] Apache cannot send emails on CentOS"
 date:   2014-05-16
-tags: RHEL-CentOS
+tags: linux
 ---
 Issue: Drupal cannot send email. Stack is on LAMP, distro is CentOS.
 
