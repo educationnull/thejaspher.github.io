@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Dirty trick - quick fixes on your dev server"
+title: "[Bash] Dirty trick - quick fixes on your dev server"
 date: 2015-09-16
-tags: drupal bash
+tags: drupal linux
 ---
 On my local dev server, I have the following setup:
 
