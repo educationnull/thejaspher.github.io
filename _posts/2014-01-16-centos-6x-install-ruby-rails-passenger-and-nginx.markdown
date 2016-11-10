@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "CentOS 6.x: Install Ruby on Rails with Passenger and Nginx"
+title:  "[CentOS 6]: Install Ruby on Rails with Passenger and Nginx"
 date:   2014-01-16
-tags: RHEL-CentOS Ruby-on-Rails
+tags: linux webdev
 ---
 There are A LOT of resources out there on how to get Ruby on Rails installed on your machine. The problem is that most of them are either for Ubuntu, or conveniently omit the fact that you’d need an actual webserver (nginx) and database (mysql). This walkthrough will show you how to get to your CentOS 6.x server to serve your rails project, using nginx and passenger as your webserver, mysql as your database. Although Ruby 2.1.0 is out, as of the date of this article, the recommended version for rails is still 2.0.0-p353.
 
