@@ -2,6 +2,7 @@
 layout: post
 title: "[Cisco] Quick gotcha: multiple ospf procs and passive interfaces"
 date: 2015-10-07
+tags: cisco
 ---
 When running multiple OSPF processes, the `passive-interface` is not respected per process and is applied globally. So the following config is invalid:
 
