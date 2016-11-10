@@ -2,7 +2,7 @@
 layout: post
 title: "The Drupal intranet: Creating a helpdesk part 1"
 date: 2015-08-27
-tags: drupal
+tags: webdev
 ---
 
 With Drupal, you are able to create large sites with complex models and relations with barely any coding.
