@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Drupal: Fix directory permissions"
+title:  "[Drupal]: Fix directory permissions"
 date:   2013-12-28
-tags: Drupal
+tags: webdev
 ---
 Issue: The Security Review module reports that "Drupal installation files and directories (except required) are not writable by the server."
 
