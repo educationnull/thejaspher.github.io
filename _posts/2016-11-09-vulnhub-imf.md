@@ -156,7 +156,7 @@ Got a hit on Roger S. Michaels's username.
 
 ### Bruteforce
 
-I'll try to brute force Roger's account using hydra and a list built into kali at `/usr/share/wordlists/*`. I'll start with the popular rockyou list. After a few hours of false positives and 301 errors I was able to craft a http-form-post string in hydra thanks to Burp Suite, Wireshark lots of Googling. In the end, I found that it was a missing "=" that got the best of me.
+Since bruteforing seems to be a usual way to get flags in other Vulnhub VMs, I'll try to brute force Roger's account using hydra and a list built into kali at `/usr/share/wordlists/*`. I'll start with the popular rockyou list. After a few hours of false positives and 301 errors I was able to craft a http-form-post string in hydra thanks to Burp Suite, Wireshark lots of Googling. In the end, I found that it was a missing "=" that got the best of me.
 
 ```bash
 cd /usr/share/wordlists/
@@ -172,25 +172,16 @@ Perhaps a somthing easier? The hint that the developer gives is:
 <!-- I couldn't get the SQL working, so I hard-coded the password. It's still mad secure through. - Roger -->
 ```
 
-So the login code might be somthing like this:
+So the login code/ query might be somthing like this:
 
-```php
-// Still building this out
-<?php
-$user = $_POST['user'];
-$pass = $_POST['pass'];
-$password = "hardCodedPassword";
-$query = "select * from users where user='$user'";
-$result = mysql_query($query);
-$rows = mysql_fetch_array($result);
-if($rows) {
-	echo "You have Logged in successfully" ;
-	create_session();
-}
-else {
-	echo "Better Luck Next time";
-}
 ```
+// Source http://www.securityidiots.com/Web-Pentest/SQL-Injection/bypass-login-using-sql-injection.html
+// http://www.sqlinjection.net/login/
+$query="select user,pass from users where user='$user' and $pass='HardC0dedP@ss'";
+```
+or
 
-
-
+```
+$query="select user from users where user='$user'";
+// some php login to check if $_POST['pass'] == "HardC0dedP@ss"
+```
