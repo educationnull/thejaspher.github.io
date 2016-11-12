@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Vulnhub IMF VM (in progress)"
+title:  "Vulnhub IMF VM (in progress, verbose version)"
 date:   2016-11-09
 tags: netsec
 ---
@@ -242,11 +242,18 @@ Few things I noted:
 - The upload page looks inactive.
 - The disavowlist seems interesting, maybe next flag is to view this page uncensored?
 
-Messing with the url by adding an apostraphe to the pagename input gives me this:
+Messing with the url gives me these:
 
 ```
 http://172.16.1.76/imfadministrator/cms.php?pagename=home':
 Warning: mysqli_fetch_row() expects parameter 1 to be mysqli_result, boolean given in /var/www/html/imfadministrator/cms.php on line 29
+
+http://172.16.1.76/imfadministrator/cms.php?pagename='or 'a'='a':
+Under Construction.
 ```
 
+http://php.net/manual/en/mysqli-result.fetch-row.php
+
 I'm tempted to use sqlmap, but will try to do this by hand.
+
+Here's what I know about the CMS becuase of the error:
