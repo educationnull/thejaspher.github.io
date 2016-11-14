@@ -303,4 +303,4 @@ Which decodes to `uploadr942.php`
 
 The previous flag gives us an upload form located at http://172.16.1.76/imfadministrator/uploadr942.php
 
-I'm guessing this will give me a chance to upload a file, but it looks like the form accepts image files (png, jpeg, etc) so I will probably have to figure out how to bypass this. I initially tried to rename a .php file with joeg, but got an error `Error: Invalid file data.` so I'll probably have to fire up Burpsuite and mess with some header information. I'll probably have to mess with the php file too.
+I'm guessing this will give me a chance to upload a file, but it looks like the form accepts image files (png, jpeg, etc) so I will probably have to figure out how to bypass this. I initially tried to rename a .php file with .jpeg, but got an error `Error: Invalid file data.` so I'll probably have to fire up Burpsuite and mess with some header information. I'll probably have to mess with the php file too. I also need to figure out where uploaded files go.
