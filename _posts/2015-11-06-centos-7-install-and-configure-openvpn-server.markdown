@@ -35,10 +35,6 @@ Configure OpenVPN
     export KEY_NAME="server"
     ...
     export KEY_CN=openvpn.example.com
-    ...
-    cp /etc/openvpn/easy-rsa/openssl-1.0.0.cnf /etc/openvpn/easy-rsa/openssl.cnf
-    cd /etc/openvpn/easy-rsa
-    source ./vars
 
 Generating Keys and Certificates
 --------------------------------
