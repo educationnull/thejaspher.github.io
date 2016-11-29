@@ -75,9 +75,21 @@ This is good enough in many cases, but sometimes you may want to make changes as
 
 The issue is that the robots.txt file is replaced every time you do a core update to Drupal, so all that hard work is gone after the next core update (this really depends on how you manage code).
 
-<span>One problem (minor, does not affect site’s behavior) </span><span>we run into is with the [Hacked!] module. Your reports will give you a warning that a core file has changed. This is a very serious warning that was triggered by a small change. It is also best practices to never ‘hack’ core files and modules.</span>
+One problem (minor, does not affect site’s behavior) we run into is with the Hacked! module. Your reports will give you a warning that a core file has changed. This is a very serious warning that was triggered by a small change. It is also best practices to never ‘hack’ core files and modules.
 
-There is a really good [module] that solves this by allowing you to save a custom robots.txt in the module, and us
+There is a really good module that solves this by allowing you to save a custom robots.txt in the module, and using hook_menu to call that file. For this to work, robots.txt must be manually removed from core. But the issue remains - robots.txt is replaced after a core update, rendering the custom changes useless until you remember to delete the file. Also, from my understanding, Hacked! will also issue you a warning that a module file has been changed.
 
-  [Hacked!]: https://www.drupal.org/project/hacked
-  [module]: https://www.drupal.org/project/robotstxt
+The best solution imo, is to do this at the server level. If you're using nginx, you can issue an alias to point robots.txt to your custom file that lives outside of drupal core. Here's how that would look like:
+
+```
+location = /robots.txt {
+     allow all;
+     log_not_found off;
+     access_log off;
+     alias /var/www/rewrites/robots.txt;
+}
+```
+
+This snippet would be placed in your default.conf file, in the server block.
+
+By using this method, you keep core's robots.txt where it is. No warnings are displayed in Hacked! and you do not need to remove/ edit core files.
