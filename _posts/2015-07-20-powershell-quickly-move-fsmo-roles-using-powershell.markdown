@@ -9,4 +9,4 @@ Requires Powershell v4:
 
     Move-ADDirectoryServerOperationMasterRole -Identity "Target-DC" -OperationMasterRole SchemaMaster,RIDMaster,InfrastructureMaster,DomainNamingMaster,PDCEmulator
 
-Source - http://social.technet.microsoft.com/wiki/contents/articles/6736.move-transfering-or-seizing-fsmo-roles-with-ad-powershell-command-to-another-domain-controller.aspx
+[Source](http://social.technet.microsoft.com/wiki/contents/articles/6736.move-transfering-or-seizing-fsmo-roles-with-ad-powershell-command-to-another-domain-controller.aspx)
