@@ -5,7 +5,7 @@ permalink: /disclosures/
 ---
 
 
-LibreNMS
+ Oct 15, 2016 - LibreNMS
 
 <https://github.com/librenms/librenms/pull/4807>
 
