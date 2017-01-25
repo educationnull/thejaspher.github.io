@@ -4,6 +4,13 @@
  - https://github.com/xapax/oscp
  - https://stevendcampbell.blogspot.com/2015/05/preparing-for-offensive-securitys-pwk.html
  - https://www.reddit.com/r/netsecstudents/comments/5i00w6/my_experience_with_the_oscp/
+ - https://www.reddit.com/r/hacking/comments/2rcfv0/question_can_anyone_describe_the_oscp/cnex2ao/
+ - http://fourfourfourfour.co/2014/04/20/oscp-review/
+ - [Path to OSCP](https://www.youtube.com/watch?v=A2s8_r973Xw&list=PLyPJ3SHNkjIFITR-Lzsc0XSOBS7JUXsOy) - Follow Jan Wikholm's journey to FIN
+ - [OSCP Review](https://www.youtube.com/watch?v=AwOEPI0KkCs) - Review from Security Weekly
+ 
+# From the horse's mouth
+ - https://support.offensive-security.com/#!pwk-support.md
  
 # Buffer overflow
  - http://www.thegreycorner.com/2010/01/beginning-stack-based-buffer-overflow.html
@@ -43,6 +50,3 @@
  - https://www.vulnhub.com/series/lord-of-the-root,67/
  - https://www.vulnhub.com/series/droopy,78/
  - https://www.vulnhub.com/series/sickos,70/
- 
- # Videos
- - [Path to OSCP](https://www.youtube.com/watch?v=A2s8_r973Xw&list=PLyPJ3SHNkjIFITR-Lzsc0XSOBS7JUXsOy)
