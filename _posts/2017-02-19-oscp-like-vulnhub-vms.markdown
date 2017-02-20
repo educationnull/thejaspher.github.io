@@ -1,4 +1,10 @@
-#OSCP-like Vulnhub VMs
+---
+layout: post
+title: "OSCP-like Vulnhub VMs"
+date: 2017-02-19
+tags: netsec
+---
+
 
 Reposting since original seems down: https://netsecfocus.com/topic/32/oscp-like-vulnhub-vms
 
