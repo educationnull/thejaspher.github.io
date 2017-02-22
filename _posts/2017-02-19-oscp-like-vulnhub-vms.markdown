@@ -4,7 +4,7 @@ title: "OSCP-like Vulnhub VMs"
 date: 2017-02-19
 tags: netsec
 ---
-Reposting since original seems down - https://netsecfocus.com/topic/32/oscp-like-vulnhub-vms
+Reposting since original [at netsecfocus](https://netsecfocus.com/topic/32/oscp-like-vulnhub-vms) seems down.
 
 - [Kioptrix: Level 1 (#1)](https://www.vulnhub.com/entry/kioptrix-level-1-1,22/)
 - [Kioptrix: Level 1.1 (#2)](https://www.vulnhub.com/entry/kioptrix-level-11-2,23/)
