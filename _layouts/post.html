@@ -6,7 +6,7 @@ layout: default
 {% if tag %}
     {% capture tag_content %}<a class="label" href="{{ tag.url }}">{{ tag.name }}</a>{% endcapture %}
 {% endif %}
-<p id="post-meta">{{ category_content }}</p>
+<p id="post-meta">{{ tag_content }}</p>
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
