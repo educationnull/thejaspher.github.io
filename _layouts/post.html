@@ -1,6 +1,11 @@
 ---
 layout: default
 ---
+{% assign tag = site.tags | where: "slug", post.tag %}
+{% assign tag = tag[0] %}
+{% if tag %}
+    {% capture tag_content %}<a class="label" href="{{ tag.url }}">{{ tag.name }}</a>{% endcapture %}
+{% endif %}
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
