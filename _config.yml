@@ -28,7 +28,7 @@ collections:
     output: true
     permalink: /tag/:name/
     
-permalink: /post/:title
+permalink: /blog/:title
 
 # Build settings
 markdown: kramdown
