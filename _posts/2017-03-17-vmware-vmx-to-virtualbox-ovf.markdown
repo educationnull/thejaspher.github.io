@@ -7,4 +7,5 @@ tags: sysadmin
 
 Requires VMWare Player to be installed. In an elevated command prompt:
 
+    cd \to-your-vm-path
     "C:\Program Files (x86)\VMware\VMware Player\ovftool\ovftool.exe" .\sourceVM.vmx .\exportVM-vbox.ovf
