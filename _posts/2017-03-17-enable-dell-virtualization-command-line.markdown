@@ -2,7 +2,6 @@
 layout: post
 title: "Dell Server - Enable virtualization via command line"
 date: 2017-03-17
-slug: sysadmin
 tags: sysadmin
 ---
     C:\> cd \Program Files\Dell\SysMgt\oma\bin
