@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Convert VMWare VMX to VirtualBox OVF"
-date: 2017-03-125
+date: 2017-03-25
 tags: sysadmin
 ---
 
