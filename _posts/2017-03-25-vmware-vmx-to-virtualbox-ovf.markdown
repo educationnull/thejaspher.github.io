@@ -2,7 +2,7 @@
 layout: post
 title: "Convert VMWare VMX to VirtualBox OVF"
 date: 2017-03-25
-tags: sysadmin
+tags: homelab
 ---
 
 Requires VMWare Player to be installed. In an elevated command prompt:
