@@ -16,6 +16,15 @@ Prep
     # git and gcc are required to build Gophish. Vim, just becuase.
     yum -y install git gcc vim
     
+    # Configure firewall
+    systemctl enable firewalld
+    systemctl start firewalld
+    
+    firewall-cmd --zone=public --add-port=80/tcp --permanent
+    firewall-cmd --zone=public --add-port=80/tcp --permanent
+    firewall-cmd --zone=public --add-port=3333/tcp --permanent
+    firewall-cmd --reload
+    
 Install go
     
     # cd into /tmp for install
