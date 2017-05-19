@@ -190,7 +190,8 @@ Configure the service
 
 Reboot and browse back to https://x.x.x.x:3333 to confirm that the Gophish starts on startup
 
-Sources
-https://gophish.gitbooks.io/user-guide/content/installation.html
-https://www.digitalocean.com/community/tutorials/how-to-install-go-1-7-on-centos-7
-https://github.com/gophish/gophish/issues/586
+Sources:
+
+<https://gophish.gitbooks.io/user-guide/content/installation.html>
+<https://www.digitalocean.com/community/tutorials/how-to-install-go-1-7-on-centos-7>
+<https://github.com/gophish/gophish/issues/586>
