@@ -17,6 +17,6 @@ This is caused by Debian requiring Broadcom NetXtreme II / bnx2 firmware, which 
 
 Solution: Add the required .deb package to a new directory called 'firmware' to the root of the USB drive. Assuming the USB is mounted in /mnt, the complete path to the firmware would be /mnt/firmware/firmware-bnx2_0.43_all.deb
 
-Required deb files: https://packages.debian.org/wheezy/all/firmware-bnx2/download
+Required deb files: <https://packages.debian.org/wheezy/all/firmware-bnx2/download>
 
-Source: http://lists.us.dell.com/pipermail/linux-poweredge/2016-January/050334.html
+Source: <http://lists.us.dell.com/pipermail/linux-poweredge/2016-January/050334.html>
