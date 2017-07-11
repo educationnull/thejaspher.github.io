@@ -6,7 +6,7 @@ tags: linux
 ---
     sudo dnf upgrade --refresh
     sudo dnf install dnf-plugin-system-upgrade
-    # ex. new version is 24
-    sudo dnf system-upgrade download --refresh --releasever=24
+    # ex. new version is 26
+    sudo dnf system-upgrade download --refresh --releasever=26
     sudo dnf system-upgrade reboot
     Source: https://fedoraproject.org/wiki/DNF_system_upgrade
